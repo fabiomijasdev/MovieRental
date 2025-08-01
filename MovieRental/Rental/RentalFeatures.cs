@@ -26,9 +26,10 @@ namespace MovieRental.Rental
         //TODO: finish this method and create an endpoint for it
         public async Task<IEnumerable<Rental>> GetRentalsByCustomerNameAsync(string customerName)
         {
-            return await _movieRentalDb.Rentals                
-                .Where(r => r.CustomerName.Contains(customerName)) 
-                .ToListAsync();
+            return await _movieRentalDb.Rentals
+                        .Include(r => r.Customer) // Ensure Customer is loaded
+                        .Where(r => r.Customer.Name.Contains(customerName)) // Case-sensitive, partial match
+                        .ToListAsync();
         }
 
     }
