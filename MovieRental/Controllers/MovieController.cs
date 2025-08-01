@@ -16,15 +16,15 @@ namespace MovieRental.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get([FromQuery] int page, int pageSize)
         {
-	        return Ok(_features.GetAll());
+            return Ok(await _features.GetAll(page, pageSize));
         }
 
         [HttpPost]
         public IActionResult Post([FromBody] Movie.Movie movie)
         {
-	        return Ok(_features.Save(movie));
+            return Ok(_features.SaveAsync(movie));
         }
     }
 }

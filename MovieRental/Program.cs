@@ -1,3 +1,4 @@
+using MovieRental.Configuration;
 using MovieRental.Data;
 using MovieRental.Movie;
 using MovieRental.Rental;
@@ -18,7 +19,10 @@ builder.Services.AddEntityFrameworkSqlite().AddDbContext<MovieRentalDbContext>()
 //inside a service with Singleton lifetime (IRentalFeatures), which is not allowed in ASP.NET Core.
 
 //fix
-builder.Services.AddScoped<IRentalFeatures, RentalFeatures>();
+//builder.Services.AddScoped<IRentalFeatures, RentalFeatures>();
+
+builder.Services.AddFeaturesServices();
+builder.Services.AddRepositoryServices();
 
 var app = builder.Build();
 
@@ -36,7 +40,7 @@ app.MapControllers();
 
 using (var client = new MovieRentalDbContext())
 {
-	client.Database.EnsureCreated();
+    client.Database.EnsureCreated();
 }
 
 app.Run();

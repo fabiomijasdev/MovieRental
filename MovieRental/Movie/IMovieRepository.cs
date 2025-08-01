@@ -1,7 +1,8 @@
 ﻿namespace MovieRental.Movie;
 
-public interface IMovieFeatures
+public interface IMovieRepository
 {
-    Task<Movie> SaveAsync(Movie movie);
+    Task<Movie> SaveAsync(Movie rental);
+
     Task<List<Movie>> GetAll(int page, int pageSize);
 }
