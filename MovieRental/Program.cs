@@ -44,7 +44,6 @@ using (var client = new MovieRentalDbContext())
     client.Database.EnsureCreated();
 }
 
-
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.Run();

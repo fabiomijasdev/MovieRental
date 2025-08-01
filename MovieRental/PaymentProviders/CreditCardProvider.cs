@@ -1,10 +1,10 @@
 ﻿namespace MovieRental.PaymentProviders
 {
-    public class MbWayProvider : IPaymentProviders
+    public class CreditCardProvider : IPaymentProviders
     {
         public void Pay(double amount)
         {
-            //Proceed with some logic to pay by mbway
+            //Proceed with some logic to pay by CreditCard
         }
     }
 }

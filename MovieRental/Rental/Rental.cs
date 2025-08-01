@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MovieRental.PaymentProviders;
 
 namespace MovieRental.Rental
 {
@@ -9,7 +10,9 @@ namespace MovieRental.Rental
         public int Id { get; set; }
         public int DaysRented { get; set; }
 
-        public string PaymentMethod { get; set; }
+        public double Amount { get; set; }
+
+        public PaymentMethod PaymentMethod { get; set; }
 
         public Movie.Movie? Movie { get; set; }
 
