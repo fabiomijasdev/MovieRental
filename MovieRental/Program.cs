@@ -1,5 +1,6 @@
 using MovieRental.Configuration;
 using MovieRental.Data;
+using MovieRental.Middlewares;
 using MovieRental.Movie;
 using MovieRental.Rental;
 
@@ -42,5 +43,8 @@ using (var client = new MovieRentalDbContext())
 {
     client.Database.EnsureCreated();
 }
+
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.Run();
