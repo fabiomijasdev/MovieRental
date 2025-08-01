@@ -1,16 +1,15 @@
-﻿using System.Threading;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using MovieRental.Data;
 
 namespace MovieRental.Rental
 {
-	public class RentalFeatures : IRentalFeatures
-	{
-		private readonly MovieRentalDbContext _movieRentalDb;
-		public RentalFeatures(MovieRentalDbContext movieRentalDb)
-		{
-			_movieRentalDb = movieRentalDb;
-		}
+    public class RentalFeatures : IRentalFeatures
+    {
+        private readonly MovieRentalDbContext _movieRentalDb;
+        public RentalFeatures(MovieRentalDbContext movieRentalDb)
+        {
+            _movieRentalDb = movieRentalDb;
+        }
 
         //Explanations:
         //Synchronous
@@ -25,10 +24,12 @@ namespace MovieRental.Rental
         }
 
         //TODO: finish this method and create an endpoint for it
-        public IEnumerable<Rental> GetRentalsByCustomerName(string customerName)
-		{
-			return [];
-		}
+        public async Task<IEnumerable<Rental>> GetRentalsByCustomerNameAsync(string customerName)
+        {
+            return await _movieRentalDb.Rentals                
+                .Where(r => r.CustomerName.Contains(customerName)) 
+                .ToListAsync();
+        }
 
-	}
+    }
 }
