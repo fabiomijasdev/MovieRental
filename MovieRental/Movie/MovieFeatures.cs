@@ -1,4 +1,7 @@
-﻿using MovieRental.Data;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using MovieRental.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace MovieRental.Movie
 {
@@ -17,8 +20,13 @@ namespace MovieRental.Movie
 			return movie;
 		}
 
-		// TODO: tell us what is wrong in this method? Forget about the async, what other concerns do you have?
-		public List<Movie> GetAll()
+        // TODO: tell us what is wrong in this method? Forget about the async, what other concerns do you have?
+
+        //Lack of abstraction/coupling with Entity Framework
+        //Performance issues with large sets
+        //Lack of error handling
+        // There is no try-catch. If there is a connection error or EF failure, an exception will be thrown and isn't  handled in higher layers.
+        public List<Movie> GetAll()
 		{
 			return _movieRentalDb.Movies.ToList();
 		}
