@@ -1,4 +1,5 @@
-﻿using MovieRental.Middlewares;
+﻿using MovieRental.CustomException;
+using MovieRental.Middlewares;
 using MovieRental.PaymentProviders;
 using SQLitePCL;
 
@@ -21,24 +22,18 @@ public class RentalFeatures : IRentalFeatures
     //Releases the thread while waiting for I/O(such as database access).
     public async Task<Rental> SaveAsync(Rental rental)
     {
-        try
-        {
-            IPaymentProviders payment = PaymentProvidersFactory.Create(rental.PaymentMethod);
+        IPaymentProviders payment = PaymentProvidersFactory.Create(rental.PaymentMethod);
 
-            payment.Pay(rental.Amount);
+        if (rental.Amount <= 0)
+            throw new PaymentFailedException($"The Amount must be greater than zero, but we have {rental.Amount} ");
 
-            _logger.LogInformation("Successful payment");
+        payment.Pay(rental.Amount);
 
-            await _rentalRepository.SaveAsync(rental);
+        _logger.LogInformation("Successful payment");
 
-            return rental;
+        await _rentalRepository.AddAsync(rental);
 
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex.Message);
-            return await Task.FromException<Rental>(ex);
-        }
+        return rental;
     }
 
     //TODO: finish this method and create an endpoint for it

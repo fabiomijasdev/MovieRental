@@ -16,9 +16,9 @@ namespace MovieRental.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get([FromQuery] int page, int pageSize)
+        public async Task<IActionResult> GetAllAsyncWithPagination([FromQuery] int page, int pageSize)
         {
-            return Ok(await _features.GetAll(page, pageSize));
+            return Ok(await _features.GetAllAsyncWithPagination(page, pageSize));
         }
 
         [HttpPost]

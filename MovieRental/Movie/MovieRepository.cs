@@ -19,7 +19,7 @@ public class MovieRepository : IMovieRepository
         return movie;
     }
 
-    public async Task<List<Movie>> GetAll(int page, int pageSize)
+    public async Task<IEnumerable<Movie>> GetAllAsyncWithPagination(int page, int pageSize)
     {
         return await _movieRentalDb.Movies
         .Skip((page - 1) * pageSize)

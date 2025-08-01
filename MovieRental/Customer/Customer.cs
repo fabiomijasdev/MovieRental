@@ -7,6 +7,6 @@ namespace MovieRental.Customer
         [Key]
         public int Id { get; set; }
         public string? Name { get; set; }
-        public DateOnly Birthday { get; set; }
+        public string Birthday { get; set; }
     }
 }

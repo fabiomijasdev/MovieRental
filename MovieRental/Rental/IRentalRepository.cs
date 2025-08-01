@@ -2,6 +2,6 @@
 
 public interface IRentalRepository
 {
-    Task<Rental> SaveAsync(Rental rental);
+    Task<Rental> AddAsync(Rental rental);
     Task<IEnumerable<Rental>> GetRentalsByCustomerNameAsync(string customerName);
 }

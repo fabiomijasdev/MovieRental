@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-
-namespace MovieRental.Movie;
+﻿namespace MovieRental.Movie;
 
 public class MovieFeatures : IMovieFeatures
 {
@@ -21,9 +19,9 @@ public class MovieFeatures : IMovieFeatures
     //    return _movieRentalDb.Movies.ToList();
     //}
 
-    public async Task<List<Movie>> GetAll(int page, int pageSize)
+    public async Task<IEnumerable<Movie>> GetAllAsyncWithPagination(int page, int pageSize)
     {
-        return await _movieRepository.GetAll(page, pageSize);
+        return await _movieRepository.GetAllAsyncWithPagination(page, pageSize);
     }
 
     public async Task<Movie> SaveAsync(Movie movie)

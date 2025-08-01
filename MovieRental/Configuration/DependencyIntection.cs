@@ -1,4 +1,5 @@
-﻿using MovieRental.Movie;
+﻿using MovieRental.Customer;
+using MovieRental.Movie;
 using MovieRental.Rental;
 
 namespace MovieRental.Configuration
@@ -11,6 +12,8 @@ namespace MovieRental.Configuration
 
             services.AddScoped<IMovieFeatures, MovieFeatures>();
 
+            services.AddScoped<ICustomerFeatures, CustomerFeatures>();
+
             return services;
         }
 
@@ -20,6 +23,9 @@ namespace MovieRental.Configuration
             services.AddScoped<IMovieRepository, MovieRepository>();
 
             services.AddScoped<IRentalRepository, RentalRepository>();
+
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+
             return services;
         }
 

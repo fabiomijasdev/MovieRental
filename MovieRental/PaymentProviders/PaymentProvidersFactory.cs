@@ -1,4 +1,6 @@
-﻿namespace MovieRental.PaymentProviders
+﻿using MovieRental.CustomException;
+
+namespace MovieRental.PaymentProviders
 {
     public class PaymentProvidersFactory
     {
@@ -16,7 +18,7 @@
                     return new CreditCardProvider();
 
                 default:
-                    throw new NotSupportedException($"{paymentMethod} is not curremtly supported as a payment method.");
+                    throw new InvalidPaymentMethodException($"{paymentMethod} is not curremtly supported as a payment method.");                    
             }
         }
     }

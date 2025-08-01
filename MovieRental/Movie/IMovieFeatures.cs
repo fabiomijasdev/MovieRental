@@ -3,5 +3,5 @@
 public interface IMovieFeatures
 {
     Task<Movie> SaveAsync(Movie movie);
-    Task<List<Movie>> GetAll(int page, int pageSize);
+    Task<IEnumerable<Movie>> GetAllAsyncWithPagination(int page, int pageSize);
 }
