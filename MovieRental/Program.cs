@@ -9,7 +9,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddEntityFrameworkSqlite().AddDbContext<MovieRentalDbContext>();
 
-builder.Services.AddSingleton<IRentalFeatures, RentalFeatures>();
+//1º Throwing an error when we start
+
+//builder.Services.AddSingleton<IRentalFeatures, RentalFeatures>();
+
+//why?
+//It means that we are trying to inject a service with Scoped lifetime (in this case, MovieRentalDbContext)
+//inside a service with Singleton lifetime (IRentalFeatures), which is not allowed in ASP.NET Core.
+
+//fix
+builder.Services.AddScoped<IRentalFeatures, RentalFeatures>();
 
 var app = builder.Build();
 
