@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Threading;
+using Microsoft.EntityFrameworkCore;
 using MovieRental.Data;
 
 namespace MovieRental.Rental
@@ -11,16 +12,20 @@ namespace MovieRental.Rental
 			_movieRentalDb = movieRentalDb;
 		}
 
-		//TODO: make me async :(
-		public Rental Save(Rental rental)
-		{
-			_movieRentalDb.Rentals.Add(rental);
-			_movieRentalDb.SaveChanges();
-			return rental;
-		}
+        //Explanations:
+        //Synchronous
+        //Executes step by step, locking the thread.
+        //Asynchronous
+        //Releases the thread while waiting for I/O(such as database access).
+        public async Task<Rental> SaveAsync(Rental rental)
+        {
+            await _movieRentalDb.Rentals.AddAsync(rental);
+            await _movieRentalDb.SaveChangesAsync();
+            return rental;
+        }
 
-		//TODO: finish this method and create an endpoint for it
-		public IEnumerable<Rental> GetRentalsByCustomerName(string customerName)
+        //TODO: finish this method and create an endpoint for it
+        public IEnumerable<Rental> GetRentalsByCustomerName(string customerName)
 		{
 			return [];
 		}
