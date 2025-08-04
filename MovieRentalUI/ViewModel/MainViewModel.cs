@@ -11,8 +11,7 @@ public class MainViewModel
     public ObservableCollection<Customer> Customers { get; set; }
 
     public ICommand ShowWindowCommand { get; set; }
-
-    public ICommand RemoveCustomerCommand { get; set; }
+  
 
     public MainViewModel()
     {
